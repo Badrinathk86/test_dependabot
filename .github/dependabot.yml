@@ -3,5 +3,5 @@ updates:
   - package-ecosystem: "react*" 
     directory: "/" 
     schedule:
-      interval: "weekly"
+      interval: "daily"
 
