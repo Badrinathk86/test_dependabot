@@ -3,5 +3,55 @@ updates:
   - package-ecosystem: "npm" 
     directory: "/" 
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "friday"
+      time: "09:00"
+      allow:
+       # Allow updates for Lodash
+        - dependency-name: "lodash"
+       # Allow updates for React and any packages starting "react"
+        - dependency-name: "react*"
+      ignore:
+        - dependency-name: "express"
+          # For Express, ignore all Dependabot updates for version 4 and 5
+          versions: ["4.x", "5.x"]
+          
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      dev-dependencies:
+        patterns:
+            - "rubocop" # A single dependency name
+            - "rspec*"  # A wildcard string that matches multiple dependency names
+            - "*"       # A wildcard that matches all dependencies in the package
+                        # ecosystem. Note: using "*" may open a large pull request
+          # Define patterns to exclude dependencies from the group (based on
+          # dependency name)
+       exclude-patterns:
+            - "gc_ruboconfig"
+            - "gocardless-*"
+            
+   - package-ecosystem: "github-actions"
+     directory: "/"
+     schedule:
+       interval: "weekly"
+       
+   - package-ecosystem: "composer"
+     directory: "/"
+     schedule:
+       interval: "weekly"
 
+   - package-ecosystem: maven
+     directory: "/"
+     schedule:
+       interval: "weekly"
+     ignore:
+      # ignore Maven APIs/SPIs
+       - dependency-name: org.apache.maven:*
+       
+   - package-ecosystem: "pip"
+     directory: "/"
+     schedule:
+       interval: "weekly"    
